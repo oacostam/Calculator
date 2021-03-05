@@ -1,0 +1,66 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31005.135
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{4908FC3E-A209-4585-94D4-A4FA4288D544}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{6E76D3EA-D708-4469-B08D-157FED0F5BFD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calculator.Api", "Calculator.Api\Calculator.Api.csproj", "{DD5BB763-BEAD-4890-9CD5-9320FC1AF184}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calculator.Sdk", "Calculator.Sdk\Calculator.Sdk.csproj", "{1A97E7F7-B51E-4576-8C0D-5C6BF44480D8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calculator.Domain", "Calculator.Domain\Calculator.Domain.csproj", "{C6D8CB0C-7D08-414E-8C66-D51125380A27}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calculator.DataAccess", "Calculator.DataAccess\Calculator.DataAccess.csproj", "{41D71342-DB3C-4C16-A167-1E76CED53409}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calculator.Client", "Calculator.Client\Calculator.Client.csproj", "{ACD9D5B2-3699-4E64-BCA4-D855393CF94E}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{4EC58AE9-27B9-4A86-A781-CDF87B204323}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DD5BB763-BEAD-4890-9CD5-9320FC1AF184}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD5BB763-BEAD-4890-9CD5-9320FC1AF184}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD5BB763-BEAD-4890-9CD5-9320FC1AF184}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD5BB763-BEAD-4890-9CD5-9320FC1AF184}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A97E7F7-B51E-4576-8C0D-5C6BF44480D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A97E7F7-B51E-4576-8C0D-5C6BF44480D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A97E7F7-B51E-4576-8C0D-5C6BF44480D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A97E7F7-B51E-4576-8C0D-5C6BF44480D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C6D8CB0C-7D08-414E-8C66-D51125380A27}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6D8CB0C-7D08-414E-8C66-D51125380A27}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6D8CB0C-7D08-414E-8C66-D51125380A27}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6D8CB0C-7D08-414E-8C66-D51125380A27}.Release|Any CPU.Build.0 = Release|Any CPU
+		{41D71342-DB3C-4C16-A167-1E76CED53409}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{41D71342-DB3C-4C16-A167-1E76CED53409}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{41D71342-DB3C-4C16-A167-1E76CED53409}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{41D71342-DB3C-4C16-A167-1E76CED53409}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ACD9D5B2-3699-4E64-BCA4-D855393CF94E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ACD9D5B2-3699-4E64-BCA4-D855393CF94E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ACD9D5B2-3699-4E64-BCA4-D855393CF94E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ACD9D5B2-3699-4E64-BCA4-D855393CF94E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4EC58AE9-27B9-4A86-A781-CDF87B204323}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4EC58AE9-27B9-4A86-A781-CDF87B204323}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4EC58AE9-27B9-4A86-A781-CDF87B204323}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4EC58AE9-27B9-4A86-A781-CDF87B204323}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{DD5BB763-BEAD-4890-9CD5-9320FC1AF184} = {4908FC3E-A209-4585-94D4-A4FA4288D544}
+		{1A97E7F7-B51E-4576-8C0D-5C6BF44480D8} = {4908FC3E-A209-4585-94D4-A4FA4288D544}
+		{C6D8CB0C-7D08-414E-8C66-D51125380A27} = {4908FC3E-A209-4585-94D4-A4FA4288D544}
+		{41D71342-DB3C-4C16-A167-1E76CED53409} = {4908FC3E-A209-4585-94D4-A4FA4288D544}
+		{ACD9D5B2-3699-4E64-BCA4-D855393CF94E} = {4908FC3E-A209-4585-94D4-A4FA4288D544}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6C1E0060-E380-4D69-9ABB-8B750E02CF19}
+	EndGlobalSection
+EndGlobal

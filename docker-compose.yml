@@ -1,0 +1,50 @@
+version: '3.4'
+
+services:
+  db:
+    container_name : mongo
+    image: mongo
+    volumes:
+        - c:/data/db:/data/db
+        - c:/data/configdb:/data/configdb
+    ports:
+          - '27017:27017'
+    restart: on-failure
+    environment:
+      AUTH: 'yes'
+      # This should go in an env file to avoid disclosing credentials
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: dBPassword01
+      MONGO_INITDB_DATABASE: calculator-service
+    command: mongod
+    networks:
+        clusternetwork:
+            ipv4_address: 173.16.0.2
+
+
+  calculator.api:
+    image: ${DOCKER_REGISTRY-}calculatorapi
+    build:
+      context: .
+      dockerfile: Calculator.Api/Dockerfile
+    depends_on:
+            - db
+    ports:
+            - 9000:80
+            - 9001:443
+    networks:
+        clusternetwork:
+            ipv4_address: 173.16.0.3
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+    volumes:
+      - ~/.aspnet/https:/https:ro
+
+networks:
+  clusternetwork:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 173.16.0.0/24
