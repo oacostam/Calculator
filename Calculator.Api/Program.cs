@@ -13,18 +13,21 @@ namespace Calculator.Api
         private static readonly Logger logger = LogManager.GetCurrentClassLogger();
         public async static Task Main(string[] args)
         {
-            logger.Info("Starting...");
+            logger.Info("Starting.");
             IHostBuilder hostBuilder = CreateHostBuilder(args);
             var host = hostBuilder.Build();
 
             try
             {
                 await host.RunAsync();
-                logger.Info("Shuting down...");
             }
             catch (Exception ex)
             {
                 logger.Fatal(ex, ex.Message);
+            }
+            finally
+            {
+                logger.Info("Shuting down.");
             }
         }
 

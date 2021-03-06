@@ -44,9 +44,14 @@ namespace Calculator.Api
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Calculator.Api v1"));
+                
             }
 
-            app.UseHttpsRedirection();
+            if (!env.IsDevelopment())
+            {
+                //Allow non secure connections for development environment.
+                app.UseHttpsRedirection();
+            }
 
             app.UseRouting();
 

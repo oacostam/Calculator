@@ -8,6 +8,9 @@ EXPOSE 443
 FROM mcr.microsoft.com/dotnet/sdk:5.0-buster-slim AS build
 WORKDIR /src
 COPY ["Calculator.Api/Calculator.Api.csproj", "Calculator.Api/"]
+COPY ["Calculator.DataAccess/Calculator.DataAccess.csproj", "Calculator.DataAccess/"]
+COPY ["Calculator.Domain/Calculator.Domain.csproj", "Calculator.Domain/"]
+COPY ["Calculator.Sdk/Calculator.Sdk.csproj", "Calculator.Sdk/"]
 RUN dotnet restore "Calculator.Api/Calculator.Api.csproj"
 COPY . .
 WORKDIR "/src/Calculator.Api"

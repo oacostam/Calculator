@@ -19,14 +19,14 @@ services:
     command: mongod
     networks:
         clusternetwork:
-            ipv4_address: 173.16.0.2
+            ipv4_address: 172.16.0.2
 
 
   calculator.api:
     image: ${DOCKER_REGISTRY-}calculatorapi
     build:
       context: .
-      dockerfile: Calculator.Api/Dockerfile
+      dockerfile: Dockerfile
     depends_on:
             - db
     ports:
@@ -34,7 +34,7 @@ services:
             - 9001:443
     networks:
         clusternetwork:
-            ipv4_address: 173.16.0.3
+            ipv4_address: 172.16.0.3
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=https://+:443;http://+:80
@@ -47,4 +47,4 @@ networks:
     ipam:
       driver: default
       config:
-        - subnet: 173.16.0.0/24
+        - subnet: 172.16.0.0/24

@@ -20,7 +20,7 @@ namespace Calculator.Api.Controllers
             this.operationService = operationService;
         }
 
-        [HttpPost]
+        [HttpGet]
         public async Task<ActionResult<OperationDto>> GetById(int id)
         {
             Operation operation = await operationService.GetById(id);

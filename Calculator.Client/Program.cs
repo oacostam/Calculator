@@ -2,9 +2,6 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using System;
-using System.Linq;
-using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Threading.Tasks;
 
 namespace Calculator.Client
@@ -12,10 +9,10 @@ namespace Calculator.Client
     class Program
     {
         static ServiceConfig config = new ServiceConfig();
-        static HttpClient client = new HttpClient();
+        
         static bool run = true;
 
-        static void ShowProduct(OperationDto operation)
+        static void PrintOperation(OperationDto operation)
         {
             Console.WriteLine($"{nameof(operation.Id)}: {operation.Id}" +
                 $"\t{nameof(operation.CreationDate)}: {operation.CreationDate}" +
@@ -25,36 +22,13 @@ namespace Calculator.Client
         }
 
 
-        static async Task<OperationDto> DoOperation<T>(T dto, int? opId)
-        {
-            try
-            {
-                const string ID_HEADER = "X­-Evi-­Tracking-­Id";
-                if (opId.HasValue)
-                {
-                    client.DefaultRequestHeaders.TryAddWithoutValidation(ID_HEADER, opId.Value.ToString());
-                }
-                else
-                {
-                    client.DefaultRequestHeaders.Remove(ID_HEADER);
-                }
-                HttpResponseMessage response = await client.PostAsJsonAsync("Calculator/Sum", dto);
-                response.EnsureSuccessStatusCode();
-                return await response.Content.ReadAsAsync<OperationDto>();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Could not process the request: {ex.Message}");
-                return null;
-            }
-        }
+        
 
         static async Task Main(string[] args)
         {
 
             Console.CancelKeyPress += new ConsoleCancelEventHandler(CancelHandler);
             using IHost host = CreateHostBuilder(args).Build();
-            ConfigureHttpClient();
             while (run)
             {
                 Console.WriteLine("Let's do some calculations! Select an operation to do. To exit, press ctrl+c");
@@ -70,37 +44,39 @@ namespace Calculator.Client
                         continue;
                     }
                     Operations requestedOp = (Operations)result;
+                    CalculatorService calculatorService = new CalculatorService(config);
+                    OperationDto opDto = null;
                     switch (requestedOp)
                     {
                         case Operations.Addition:
-                            await Addition();
+                            opDto = await calculatorService.Addition();
                             break;
                         case Operations.Subtraction:
+                            opDto = await calculatorService.Subtraction();
                             break;
                         case Operations.Multiplication:
+                            opDto = await calculatorService.Multiplication();
                             break;
                         case Operations.Division:
+                            opDto = await calculatorService.Division();
                             break;
                         case Operations.SquareRoot:
+                            opDto = await calculatorService.SquareRoot();
                             break;
                         case Operations.RecoverOp:
+                            opDto = await calculatorService.RecoverOp();
                             break;
                         default:
-                            break;
+                            throw new InvalidOperationException("Operation not defined!");
                     }
+                    if(opDto != null)
+                        PrintOperation(opDto);
                 }
             }
             await host.RunAsync();
         }
 
-        private static void ConfigureHttpClient()
-        {
-            client.BaseAddress = new Uri(config.ServiceUrl);
-            client.DefaultRequestHeaders.Accept.Clear();
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-        }
-
-        protected static void CancelHandler(object sender, ConsoleCancelEventArgs args)
+       protected static void CancelHandler(object sender, ConsoleCancelEventArgs args)
         {
             run = false;
         }
@@ -119,18 +95,6 @@ namespace Calculator.Client
                 configurationRoot.GetSection(nameof(ServiceConfig)).Bind(config);
             });
 
-        private static async Task Addition()
-        {
-            Console.WriteLine("Please, specify Addends separated by spaces.");
-            AditionDto dto = new AditionDto();
-            dto.Addends = Console.ReadLine().Split(' ').Select(v => double.Parse(v)).ToList();
-            Console.WriteLine("If you want to store the calculation, please, specify a new id.");
-            int? id = null;
-            if (int.TryParse(Console.ReadLine(), out int tmp))
-            {
-                id = tmp;
-            }
-            await DoOperation(dto, id);
-        }
+        
     }
 }
